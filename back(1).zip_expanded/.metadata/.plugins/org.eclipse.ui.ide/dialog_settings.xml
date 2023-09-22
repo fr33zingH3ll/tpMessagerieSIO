@@ -6,6 +6,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="/home/freezing/Documents/tpMessagerieSIO/back(1).zip_expanded"/>
 			<item value="/home/freezing/eclipse-workspace/back-end.zip_expanded"/>
 			<item value="/home/freezing/eclipse-workspace/messagerie-repo/back.zip_expanded"/>
 			<item value="/home/freezing/eclipse-workspace/back(1).zip_expanded/back"/>

@@ -3,5 +3,8 @@
 	"dbHost": "localhost",
 	"dbName": "tpMessagerie",
 	"dbUser": "userMessagerie",
-	"dbPassword": "toto"
+	"dbPassword": "toto",
+	"table1": "user",
+	"table2": "message",
+	"table3": "conversation"
 }

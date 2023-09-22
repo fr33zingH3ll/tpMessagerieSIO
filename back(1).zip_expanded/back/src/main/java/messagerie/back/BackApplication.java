@@ -9,10 +9,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.rethinkdb.net.Connection;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import utils.Config;
+import utils.DbInitializer;
 
-import controller.Config;
-import controller.DbInitializer;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootApplication
 public class BackApplication {
@@ -37,7 +37,6 @@ public class BackApplication {
 		};
 		this.connect = r.connection().hostname(this.config.dbHost).port(this.config.dbPort).connect();
 		DbInitializer dbInitializer = new DbInitializer(this.config, this.connect);
-		UserController userController = new UserController(this.config, this.connect);
 		
 	}
 	
