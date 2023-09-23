@@ -1,10 +1,3 @@
 {
-	"dbPort": 28015,
-	"dbHost": "localhost",
-	"dbName": "tpMessagerie",
-	"dbUser": "userMessagerie",
-	"dbPassword": "toto",
-	"table1": "user",
-	"table2": "message",
-	"table3": "conversation"
+	"dbUrl": "rethinkdb://userMessagerie:toto@192.168.56.101:28015/tpMessagerie"
 }

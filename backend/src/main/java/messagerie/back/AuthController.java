@@ -23,25 +23,12 @@ import utils.Config;
 @RequestMapping("/auth")
 public class AuthController {
 	
-	public static final ObjectMapper MAPPER = new ObjectMapper();
-	
-	private Connection connect;
-	private Config config;
-	
 	public AuthController () {
-		try {
-			this.config = MAPPER.readValue(new File("./config.json"), Config.class);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		};
-		this.connect = r.connection().hostname(this.config.dbHost).port(this.config.dbPort).connect();
 	}
 	
 	@PostMapping("/login")
 	public Result<User> login(@RequestParam String email, @RequestParam String password) {
-		return r.db("tpMessagerie").table("user").filter(r.row("email").equals(email)).run(this.connect, User.class);
+		return null;
 	}
 
 }

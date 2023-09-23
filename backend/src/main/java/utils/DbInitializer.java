@@ -13,29 +13,20 @@ public class DbInitializer {
 	public DbInitializer(Config config, Connection connect) {
 		this.config = config;
 		this.connect = connect;
-		this.DbInit();
-		this.TablesInit();
 	}
 	
-	public void DbInit() {
-		Result<Object> isCreated = r.dbList().contains(this.config.dbName).run(this.connect);
-		if (isCreated.toList() == null) {
-			r.dbCreate(this.config.dbName).run(this.connect);
-		}
-	}
-	
-	public void TablesInit() {
-		Result<Object> table1 = r.db(this.config.dbName).tableList().contains(this.config.table1).run(this.connect);
-		Result<Object> table2 = r.db(this.config.dbName).tableList().contains(this.config.table2).run(this.connect);
-		Result<Object> table3 = r.db(this.config.dbName).tableList().contains(this.config.table3).run(this.connect);
+	public void tablesInit() {
+		Result<Object> table1 = r.tableList().contains("user").run(this.connect);
+		Result<Object> table2 = r.tableList().contains("conversation").run(this.connect);
+		Result<Object> table3 = r.tableList().contains("message").run(this.connect);
 		if (table1.toList() == null) {
-			r.db(this.config.dbName).tableCreate(this.config.table1).run(this.connect);
+			r.tableCreate("user").run(this.connect);
 		}
 		if (table2.toList() == null) {
-			r.db(this.config.dbName).tableCreate(this.config.table2).run(this.connect);
+			r.tableCreate("conversation").run(this.connect);
 		}
 		if (table3.toList() == null) {
-			r.db(this.config.dbName).tableCreate(this.config.table3).run(this.connect);
+			r.tableCreate("message").run(this.connect);
 		}
 	}
 }
