@@ -1,7 +1,0 @@
-{
-	"dbPort": 28015,
-	"dbHost": "localhost",
-	"dbName": "tpMessagerie",
-	"dbUser": "userMessagerie",
-	"dbPassword": "toto"
-}
