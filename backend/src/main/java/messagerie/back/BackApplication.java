@@ -45,7 +45,7 @@ public class BackApplication {
 		return config;
 	}
 	
-	public static Connection connect() {
+	public static Connection getConnect() {
 		return connect;
 	}
 	

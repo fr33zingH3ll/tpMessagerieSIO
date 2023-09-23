@@ -1,19 +1,25 @@
 package entities;
 
-public class User {
-	
-	private String name, firstname, mail, phone, role;
-	
-	public User(String name, String firstname, String mail , String phone, String role) {
+import java.util.Collection;
+import java.util.Collections;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+public class User implements UserDetails {
+
+	private static final long serialVersionUID = -2028157359207061330L;
+	private String name, firstname, password, email, phone, role;
+
+	public User(String name, String firstname, String password, String email, String phone, String role) {
 		this.name = name;
 		this.firstname = firstname;
-		this.mail = mail;
+		this.password = password;
+		this.email = email;
 		this.phone = phone;
 		this.role = role;
-	}
-	
-	public String hello_world(String string) {
-		return string;
 	}
 
 	public String getName() {
@@ -31,13 +37,21 @@ public class User {
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
-
-	public String getMail() {
-		return mail;
+	
+	public String getPassword() {
+		return password;
 	}
 
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String mail) {
+		this.email = mail;
 	}
 
 	public String getPhone() {
@@ -56,5 +70,35 @@ public class User {
 		this.role = role;
 	}
 
-	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return Collections.emptyList();
+	}
+
+	@Override
+	@JsonIgnore
+	public String getUsername() {
+		return this.email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
 }
