@@ -12,42 +12,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rethinkdb.net.Result;
-
-import entities.User;
 import utils.JwtUtil;
 import utils.UserService;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-	
+
 	@Autowired
-    private AuthenticationManager authenticationManager;
+	private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    @Autowired
-    private JwtUtil jwtUtil;
-	
-	public AuthController () {
-	}
-	
+	@Autowired
+	private JwtUtil jwtUtil;
+
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestParam String email, @RequestParam String password) {
-		 try {
-	            authenticationManager.authenticate(
-	                new UsernamePasswordAuthenticationToken(email, password)
-	            );
-	        } catch (BadCredentialsException e) {
-	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
-	        }
+		try {
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
+		} catch (BadCredentialsException e) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+		}
 
-	        UserDetails userDetails = userService.loadUserByUsername(email);
-	        String token = jwtUtil.generateToken(userDetails.getUsername());
+		UserDetails userDetails = userService.loadUserByUsername(email);
+		String token = jwtUtil.generateToken(userDetails.getUsername());
 
-	        return ResponseEntity.ok(token);
+		return ResponseEntity.ok(token);
 	}
-
 }
