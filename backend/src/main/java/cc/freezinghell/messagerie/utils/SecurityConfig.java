@@ -8,24 +8,17 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-	@Autowired
-	private UserDetailsService userDetailsService;
-
-	@Autowired
-	private JwtUtil jwtUtil;
-
 	private DaoAuthenticationProvider daoAuthenticationProvider;
 	private ProviderManager providerManager;
 
-	public SecurityConfig() {
+	public SecurityConfig(@Autowired UserService userService) {
 		this.daoAuthenticationProvider = new DaoAuthenticationProvider();
-		this.daoAuthenticationProvider.setUserDetailsService(this.userDetailsService);
+		this.daoAuthenticationProvider.setUserDetailsService(userService);
 
 		this.providerManager = new ProviderManager(daoAuthenticationProvider);
 	}
@@ -37,9 +30,10 @@ public class SecurityConfig {
 
 	@Bean
 	public DefaultSecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
-		http.authorizeHttpRequests((auth) -> auth.anyRequest().authenticated())
+		http.csrf(csrf -> csrf.disable())
+				.authorizeHttpRequests((auth) -> auth.anyRequest().permitAll())
 				.authenticationManager(this.providerManager);
+
 		return http.build();
 	}
 }

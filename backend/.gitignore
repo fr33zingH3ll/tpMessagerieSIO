@@ -37,3 +37,5 @@ build/
 .classpath
 /.metadata/
 
+config.json
+

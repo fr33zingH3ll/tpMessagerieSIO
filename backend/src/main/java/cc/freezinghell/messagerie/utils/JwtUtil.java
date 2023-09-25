@@ -14,7 +14,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JwtUtil {
-	private final String SECRET = "your-secret-key"; // Replace with a secure secret key
+	private final String SECRET = "eW91ci1zZWNyZXQteW91ci1zZWNyZXQteW91ci1zZWNyZXQteW91ci1zZWNyZXQteW91ci1zZWNy"
+			+ "ZXQteW91ci1zZWNyZXQteW91ci1zZWNyZXQteW91ci1zZWNyZXQteW91ci1zZWNyZXQteW91ci1z"
+			+ "ZWNyZXQteW91ci1zZWNyZXQteW91ci1zZWNyZXQteW91ci1zZWNyZXQteW91ci1zZWNyZXQteW91"
+			+ "ci1zZWNyZXQteW91ci1zZWNyZXQteW91ci1zZWNyZXQteW91ci1zZWNyZXQ="; // Replace with a secure secret key
     private final long EXPIRATION_TIME = 900_000; // 15 minutes
 
     public String extractUsername(String token) {

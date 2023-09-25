@@ -13,15 +13,6 @@ public class User implements UserDetails {
 	private static final long serialVersionUID = -2028157359207061330L;
 	private String name, firstname, password, email, phone, role;
 
-	public User(String name, String firstname, String password, String email, String phone, String role) {
-		this.name = name;
-		this.firstname = firstname;
-		this.password = password;
-		this.email = email;
-		this.phone = phone;
-		this.role = role;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -37,7 +28,7 @@ public class User implements UserDetails {
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
