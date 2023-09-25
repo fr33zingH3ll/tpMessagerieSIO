@@ -1,4 +1,4 @@
-package messagerie.back;
+package cc.freezinghell.messagerie.controllers;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rethinkdb.net.Result;
 
-
-import entities.User;
+import cc.freezinghell.messagerie.entities.User;
 
 @RestController
 @RequestMapping("/user")

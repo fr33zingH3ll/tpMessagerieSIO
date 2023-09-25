@@ -1,4 +1,4 @@
-package utils;
+package cc.freezinghell.messagerie.utils;
 
 import static com.rethinkdb.RethinkDB.r;
 
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.rethinkdb.net.Result;
 
-import entities.User;
-import messagerie.back.BackApplication;
+import cc.freezinghell.messagerie.BackApplication;
+import cc.freezinghell.messagerie.entities.User;
 
 @Service
 public class UserService implements UserDetailsService {

@@ -1,4 +1,4 @@
-package utils;
+package cc.freezinghell.messagerie.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

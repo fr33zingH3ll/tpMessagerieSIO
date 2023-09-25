@@ -1,4 +1,4 @@
-package utils;
+package cc.freezinghell.messagerie.utils;
 
 import java.util.Date;
 import java.util.HashMap;

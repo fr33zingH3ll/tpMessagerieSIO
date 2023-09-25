@@ -1,4 +1,4 @@
-package utils;
+package cc.freezinghell.messagerie.utils;
 
 import static com.rethinkdb.RethinkDB.r;
 

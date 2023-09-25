@@ -1,4 +1,4 @@
-package entities;
+package cc.freezinghell.messagerie.entities;
 
 import java.util.Collection;
 import java.util.Collections;

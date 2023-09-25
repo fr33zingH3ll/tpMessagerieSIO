@@ -1,4 +1,4 @@
-package messagerie.back;
+package cc.freezinghell.messagerie;
 
 import static com.rethinkdb.RethinkDB.r;
 
@@ -9,8 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.rethinkdb.net.Connection;
 
-import utils.Config;
-import utils.DbInitializer;
+import cc.freezinghell.messagerie.utils.Config;
+import cc.freezinghell.messagerie.utils.DbInitializer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
