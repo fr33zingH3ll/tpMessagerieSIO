@@ -5,10 +5,14 @@ import java.util.Collections;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class User implements UserDetails {
+	
+	
 
 	private static final long serialVersionUID = -2028157359207061330L;
 	private String name, firstname, password, email, phone, role;
