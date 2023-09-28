@@ -1,4 +1,4 @@
-package cc.freezinghell.messagerie.utils;
+package cc.freezinghell.messagerie.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +9,8 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.DefaultSecurityFilterChain;
+
+import cc.freezinghell.messagerie.utils.UserService;
 
 @Configuration
 @EnableWebSecurity

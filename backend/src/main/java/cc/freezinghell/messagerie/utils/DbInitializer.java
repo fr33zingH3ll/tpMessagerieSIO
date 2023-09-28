@@ -5,6 +5,8 @@ import static com.rethinkdb.RethinkDB.r;
 import com.rethinkdb.net.Connection;
 import com.rethinkdb.net.Result;
 
+import cc.freezinghell.messagerie.config.Config;
+
 public class DbInitializer {
 	
 	private Config config;

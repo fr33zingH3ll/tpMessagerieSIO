@@ -1,4 +1,4 @@
-package cc.freezinghell.messagerie.utils;
+package cc.freezinghell.messagerie.config;
 
 public class Config {
 	public String dbUrl;
