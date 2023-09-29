@@ -10,6 +10,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/*
+ * objet representant un utilisateur est qui implments UserDetails de spring boot
+ */
+
 public class User implements UserDetails {
 	
 	

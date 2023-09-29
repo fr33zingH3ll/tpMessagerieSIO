@@ -16,19 +16,30 @@ import com.rethinkdb.net.Result;
 import cc.freezinghell.messagerie.BackApplication;
 import cc.freezinghell.messagerie.entities.User;
 
+/*
+ * MyHandler est la class qui recupere tout les messages envoyé sur le websocket.
+ */
+
 public class MyHandler extends TextWebSocketHandler {
 	
 	@Autowired
-	private JwtUtil jwtUil;
+	private JwtUtil jwtUtil;
 	
 	@Autowired
 	private UserService userService;
 
+	/*
+	 * recupere la session créé
+	 */
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		
 	}
+	
+	/*
+	 * recupere depuis la session le message et vérifie les changements en db pour les envoyé au websocket
+	 */
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -42,13 +53,13 @@ public class MyHandler extends TextWebSocketHandler {
 			return;
 		}
 		String token = json.get("token").asText();
-		boolean tokenExpired = jwtUil.isTokenExpired(token);
+		boolean tokenExpired = jwtUtil.isTokenExpired(token);
 		if (tokenExpired) {
 			session.sendMessage(new TextMessage("token expiré"));
 			session.close();
 			return;
 		}
-		String username = jwtUil.extractUsername(token);
+		String username = jwtUtil.extractUsername(token);
 		User userDetails = (User) userService.loadUserByUsername(username);
 		session.getAttributes().put("user", userDetails);
 		

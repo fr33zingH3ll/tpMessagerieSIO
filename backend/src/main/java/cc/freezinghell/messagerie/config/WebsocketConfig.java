@@ -9,6 +9,10 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 
 import cc.freezinghell.messagerie.utils.MyHandler;
 
+/*
+ * configure le websocket avec un handler et une route 
+ */
+
 @Configuration
 @EnableWebSocket
 public class WebsocketConfig implements WebSocketConfigurer {

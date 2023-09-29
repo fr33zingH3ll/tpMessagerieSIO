@@ -14,6 +14,10 @@ import cc.freezinghell.messagerie.utils.DbInitializer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/*
+ * recupération de la config et lancement de l'application
+ */
+
 @SpringBootApplication
 public class BackApplication {
 

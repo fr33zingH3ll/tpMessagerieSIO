@@ -23,6 +23,10 @@ import cc.freezinghell.messagerie.entities.User;
 import cc.freezinghell.messagerie.utils.JwtUtil;
 import cc.freezinghell.messagerie.utils.UserService;
 
+/*
+ * controlleur qui gère l'authentification des utiisateurs
+ */
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -38,6 +42,13 @@ public class AuthController {
 	@Autowired
 	private JwtUtil jwtUtil;
 
+	/*
+	 * connection des utilisateur.
+	 * 
+	 * @return ResponseEntity<ObjectNode> un json en somme
+	 * @param @RequestBody ObjectNode 
+	 */
+	
 	@PostMapping("/login")
 	public ResponseEntity<ObjectNode> login(@RequestBody ObjectNode body) {
 		String email = body.get("email").asText();
@@ -54,6 +65,13 @@ public class AuthController {
 
 		return ResponseEntity.ok(BackApplication.MAPPER.createObjectNode().put("token", token));
 	}
+	
+	/*
+	 * inscription des utilisateurs qui a la fin devras n'etre accesible pas les user ayant le role ADMIN
+	 * 
+	 * @return ResponseEntity<ObjectNode>
+	 * @param @RequestBody ObjectNode
+	 */
 	
 	@PostMapping("/register")
 	public ResponseEntity<ObjectNode> register(@RequestBody ObjectNode body) {

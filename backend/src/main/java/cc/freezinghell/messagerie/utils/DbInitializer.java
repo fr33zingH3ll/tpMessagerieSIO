@@ -7,6 +7,10 @@ import com.rethinkdb.net.Result;
 
 import cc.freezinghell.messagerie.config.Config;
 
+/*
+ * initialise la base de donnée
+ */
+
 public class DbInitializer {
 	
 	private Config config;
@@ -16,6 +20,10 @@ public class DbInitializer {
 		this.config = config;
 		this.connect = connect;
 	}
+	
+	/*
+	 * initialise les tables user, message, conversation
+	 */
 	
 	public void tablesInit() {
 		Result<Object> table1 = r.tableList().contains("user").run(this.connect);
