@@ -11,10 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
-/*
+/**
  * objet representant un utilisateur est qui implments UserDetails de spring boot
  */
-
 public class User implements UserDetails {
 	private static final long serialVersionUID = -2028157359207061330L;
 	private String name, firstname, password, email, phone, role = "ROLE_USER";
@@ -82,23 +81,26 @@ public class User implements UserDetails {
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonExpired() {
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonLocked() {
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isEnabled() {
 		return true;
 	}
-
 }

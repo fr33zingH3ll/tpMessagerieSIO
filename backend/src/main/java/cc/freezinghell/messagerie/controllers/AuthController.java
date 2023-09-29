@@ -2,15 +2,13 @@ package cc.freezinghell.messagerie.controllers;
 
 import static com.rethinkdb.RethinkDB.r;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,11 +23,11 @@ import cc.freezinghell.messagerie.BackApplication;
 import cc.freezinghell.messagerie.entities.User;
 import cc.freezinghell.messagerie.utils.JwtUtil;
 import cc.freezinghell.messagerie.utils.UserService;
+import jakarta.annotation.security.RolesAllowed;
 
-/*
+/**
  * controlleur qui gère l'authentification des utiisateurs
  */
-
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -45,14 +43,13 @@ public class AuthController {
 	@Autowired
 	private JwtUtil jwtUtil;
 
-	/*
+	/**
 	 * connection des utilisateur.
 	 * 
 	 * @return ResponseEntity<ObjectNode> un json en somme
 	 * 
 	 * @param @RequestBody ObjectNode
 	 */
-
 	@PostMapping("/login")
 	public ResponseEntity<ObjectNode> login(@RequestBody ObjectNode body) {
 		String email = body.get("email").asText();
@@ -70,7 +67,7 @@ public class AuthController {
 		return ResponseEntity.ok(BackApplication.MAPPER.createObjectNode().put("token", token));
 	}
 
-	/*
+	/**
 	 * inscription des utilisateurs qui a la fin devras n'etre accesible pas les
 	 * user ayant le role ADMIN
 	 * 
@@ -78,8 +75,8 @@ public class AuthController {
 	 * 
 	 * @param @RequestBody ObjectNode
 	 */
-
 	@PostMapping("/register")
+	@RolesAllowed({ "ADMIN" })
 	public ResponseEntity<ObjectNode> register(@RequestBody ObjectNode body) {
 		// get email password and token in the body
 		String email = body.get("email").asText();
@@ -87,9 +84,11 @@ public class AuthController {
 
 		// test if user already exist
 		User user = (User) userService.loadUserByUsername(email);
-		if (user != null)
+
+		if (user != null) {
 			return ResponseEntity
 					.ok(BackApplication.MAPPER.createObjectNode().put("error", "ERROR: l'utilisateur existe déjà"));
+		}
 
 		// if the user not exists so register
 		user = new User();

@@ -60,8 +60,7 @@ public class SecurityConfig {
 	public DefaultSecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable())
 				.addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
-				.authorizeHttpRequests((auth) -> auth.requestMatchers("/auth/login").permitAll())
-				.authorizeHttpRequests((auth) -> auth.requestMatchers("/auth/register", "/user/crud").hasRole("ROLE_ADMIN"))
+				.authorizeHttpRequests((auth) -> auth.anyRequest().permitAll())
 				.authenticationManager(this.providerManager);
 
 		return http.build();
