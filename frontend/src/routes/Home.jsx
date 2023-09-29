@@ -1,9 +1,10 @@
 import React from 'react';
+import UserList from './UserList';
 
 function Home (props) {
     return (
         <>
-            <p>home</p>
+            <UserList />
         </>
     );
 }

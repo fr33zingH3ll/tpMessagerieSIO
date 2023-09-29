@@ -39,7 +39,6 @@ public class MessagingHandler extends TextWebSocketHandler {
 	 */
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-
 	}
 
 	/**
@@ -72,8 +71,6 @@ public class MessagingHandler extends TextWebSocketHandler {
 		String username = jwtUtil.extractUsername(token);
 		User userDetails = (User) userService.loadUserByUsername(username);
 		session.getAttributes().put("user", userDetails);
-
-		session.sendMessage(new TextMessage("ok"));
 
 		Result<ChangeSet<Message>> changes = r.table("message")
 				.changes()

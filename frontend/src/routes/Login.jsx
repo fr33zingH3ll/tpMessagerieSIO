@@ -3,46 +3,39 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../Api";
 import { Button, Form, Input } from 'antd';
 
-const onFinish = (values) => {
-  console.log('Success:', values);
-};
-const onFinishFailed = (errorInfo) => {
-  console.log('Failed:', errorInfo);
-};
-
-function Login () {
+function Login() {
     const [state, setState] = useState({});
-	const navigate = useNavigate();
+    const navigate = useNavigate();
 
-	const onFinish = (values) => {
-		const { email, password } = values;
-		login(email, password).then(
-			() => {
-				navigate("/");
-			},
-			(error) => {
-				setState({ error });
-			}
-		);
-	};
+    const onFinish = (values) => {
+        const { email, password } = values;
+        login(email, password).then(
+            () => {
+                navigate("/");
+            },
+            (error) => {
+                setState({ error });
+            }
+        );
+    };
+
     return (
         <>
             <Form
                 name="basic"
                 labelCol={{
-                span: 8,
+                    span: 8,
                 }}
                 wrapperCol={{
-                span: 16,
+                    span: 16,
                 }}
                 style={{
-                maxWidth: 600,
+                    maxWidth: 600,
                 }}
                 initialValues={{
-                remember: true,
+                    remember: true,
                 }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
                 <Form.Item
@@ -50,11 +43,11 @@ function Login () {
                     name="email"
                     rules={[
                         {
-                        required: true,
-                        message: 'Please input your email!',
+                            required: true,
+                            message: 'Please input your email!',
                         },
                     ]}
-                    >
+                >
                     <Input />
                 </Form.Item>
                 <Form.Item
@@ -62,11 +55,11 @@ function Login () {
                     name="password"
                     rules={[
                         {
-                        required: true,
-                        message: 'Please input your password!',
+                            required: true,
+                            message: 'Please input your password!',
                         },
                     ]}
-                    >
+                >
                     <Input.Password />
                 </Form.Item>
                 <Form.Item
@@ -74,7 +67,7 @@ function Login () {
                         offset: 8,
                         span: 16,
                     }}
-                    >
+                >
                     <Button type="primary" htmlType="submit">
                         Submit
                     </Button>

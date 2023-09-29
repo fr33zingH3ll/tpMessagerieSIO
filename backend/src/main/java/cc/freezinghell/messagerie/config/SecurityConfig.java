@@ -14,10 +14,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import cc.freezinghell.messagerie.utils.JwtAuthenticationFilter;
 import cc.freezinghell.messagerie.utils.UserService;
 
-/*
+/**
  * configure le routage web 
  */
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -31,23 +30,21 @@ public class SecurityConfig {
 		this.providerManager = new ProviderManager(daoAuthenticationProvider);
 	}
 	
-	/*
+	/**
 	 * @return AuthenticationManager
 	 * 
 	 */
-
 	@Bean
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return this.providerManager;
 	}
 
-	/*
+	/**
 	 * sert a définir les parametre de routage et désactive le csrf
 	 * 
 	 * @return DefaultSecurityFilterChain
 	 * @param HttpSecurity
 	 */
-	
 	@Bean
 	public JwtAuthenticationFilter jwtFilter() {
 		return new JwtAuthenticationFilter();

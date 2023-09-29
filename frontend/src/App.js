@@ -6,7 +6,7 @@ import Home from './routes/Home';
 import NotFound from './routes/NotFound';
 import Navbar from './routes/Navbar';
 import Register from './routes/Register';
-import Logout from './routes/Logout';
+import DMChat from './routes/DMChat';
 
 const { Header, Footer, Content } = Layout;
 
@@ -20,9 +20,9 @@ function App() {
 				</Header>
 				<Content>
 					<Routes>
-						<Route path="/logout" element={<Logout />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/register" element={<Register />} />
+						<Route path="/dm/:userId" element={<DMChat />} />
 						<Route path="/" element={<Home />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
