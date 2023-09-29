@@ -9,9 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import cc.freezinghell.messagerie.utils.CustomAuthorityDeserializer;
 
 /*
  * objet representant un utilisateur est qui implments UserDetails de spring boot
@@ -72,8 +70,8 @@ public class User implements UserDetails {
 		this.role = role;
 	}
 
-	@JsonDeserialize(using = CustomAuthorityDeserializer.class)
 	@Override
+	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 		list.add(new SimpleGrantedAuthority(this.getRole()));

@@ -9,7 +9,10 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.DefaultSecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import cc.freezinghell.messagerie.utils.JwtAuthenticationFilter;
+import cc.freezinghell.messagerie.utils.JwtUtil;
 import cc.freezinghell.messagerie.utils.UserService;
 
 /*
@@ -21,6 +24,8 @@ import cc.freezinghell.messagerie.utils.UserService;
 public class SecurityConfig {
 	private DaoAuthenticationProvider daoAuthenticationProvider;
 	private ProviderManager providerManager;
+	private JwtUtil jwtUtil;
+	private UserService userService;
 	
 	public SecurityConfig(@Autowired UserService userService) {
 		this.daoAuthenticationProvider = new DaoAuthenticationProvider();
@@ -47,10 +52,16 @@ public class SecurityConfig {
 	 */
 	
 	@Bean
+	public JwtAuthenticationFilter jwtFilter() {
+		return new JwtAuthenticationFilter();
+	}
+	
+	@Bean
 	public DefaultSecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable())
-			.authorizeHttpRequests((auth) -> auth.requestMatchers("/auth/register").hasRole("ADMIN"))
-				.authorizeHttpRequests((auth) -> auth.anyRequest().permitAll())
+				.addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
+				.authorizeHttpRequests((auth) -> auth.requestMatchers("/auth/login").permitAll())
+				.authorizeHttpRequests((auth) -> auth.requestMatchers("/auth/register", "/user/crud").hasRole("ADMIN"))
 				.authenticationManager(this.providerManager);
 
 		return http.build();

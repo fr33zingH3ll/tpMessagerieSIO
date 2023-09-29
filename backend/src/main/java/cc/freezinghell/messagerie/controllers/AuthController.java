@@ -81,16 +81,6 @@ public class AuthController {
 		// get email password and token in the body
 		String email = body.get("email").asText();
 		String password = body.get("password").asText();
-		String token = body.get("token").asText();
-		
-		// teste if the token is null
-		if (token == null) return ResponseEntity.ok(BackApplication.MAPPER.createObjectNode().put("error", "ERROR: il n'y a pas de token"));
-		
-		// get admin user who try to register new user
-		String admin_email = jwtUtil.extractUsername(token);
-		User admin = (User) userService.loadUserByUsername(admin_email);
-		System.out.println(admin.getRole());
-		if (admin.getRole() != "ADMIN") return ResponseEntity.ok(BackApplication.MAPPER.createObjectNode().put("error", "ERROR: Acces denied"));
 		
 		// test if user already exist
 		User user = (User) userService.loadUserByUsername(email);
