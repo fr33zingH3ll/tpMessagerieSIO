@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import cc.freezinghell.messagerie.entities.User;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SecurityException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -43,7 +44,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 			try {
 				username = jwtTokenUtil.extractUsername(token);
-			} catch (SecurityException e) {
+			} catch (SecurityException | ExpiredJwtException e) {
 				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
 				return;
 			}
