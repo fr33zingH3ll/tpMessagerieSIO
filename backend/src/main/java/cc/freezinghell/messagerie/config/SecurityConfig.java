@@ -12,7 +12,6 @@ import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import cc.freezinghell.messagerie.utils.JwtAuthenticationFilter;
-import cc.freezinghell.messagerie.utils.JwtUtil;
 import cc.freezinghell.messagerie.utils.UserService;
 
 /*
@@ -24,8 +23,6 @@ import cc.freezinghell.messagerie.utils.UserService;
 public class SecurityConfig {
 	private DaoAuthenticationProvider daoAuthenticationProvider;
 	private ProviderManager providerManager;
-	private JwtUtil jwtUtil;
-	private UserService userService;
 	
 	public SecurityConfig(@Autowired UserService userService) {
 		this.daoAuthenticationProvider = new DaoAuthenticationProvider();

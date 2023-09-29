@@ -40,7 +40,7 @@ public class BackApplication {
 		}
 
 		connect = r.connection(config.dbUrl).connect();
-		DbInitializer dbInitializer = new DbInitializer(config, connect);
+		DbInitializer dbInitializer = new DbInitializer(connect);
 		dbInitializer.tablesInit();
 	}
 
