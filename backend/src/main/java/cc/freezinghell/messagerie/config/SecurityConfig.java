@@ -61,7 +61,7 @@ public class SecurityConfig {
 		http.csrf(csrf -> csrf.disable())
 				.addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
 				.authorizeHttpRequests((auth) -> auth.requestMatchers("/auth/login").permitAll())
-				.authorizeHttpRequests((auth) -> auth.requestMatchers("/auth/register", "/user/crud").hasRole("ADMIN"))
+				.authorizeHttpRequests((auth) -> auth.requestMatchers("/auth/register", "/user/crud").hasRole("ROLE_ADMIN"))
 				.authenticationManager(this.providerManager);
 
 		return http.build();

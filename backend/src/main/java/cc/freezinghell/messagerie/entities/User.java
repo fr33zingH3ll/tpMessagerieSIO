@@ -16,11 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 
 public class User implements UserDetails {
-	
-	
-
 	private static final long serialVersionUID = -2028157359207061330L;
-	private String name, firstname, password, email, phone, role;
+	private String name, firstname, password, email, phone, role = "ROLE_USER";
 
 	public String getName() {
 		return name;

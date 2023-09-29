@@ -39,7 +39,7 @@ public class AuthController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
 	@Autowired
@@ -49,9 +49,10 @@ public class AuthController {
 	 * connection des utilisateur.
 	 * 
 	 * @return ResponseEntity<ObjectNode> un json en somme
-	 * @param @RequestBody ObjectNode 
+	 * 
+	 * @param @RequestBody ObjectNode
 	 */
-	
+
 	@PostMapping("/login")
 	public ResponseEntity<ObjectNode> login(@RequestBody ObjectNode body) {
 		String email = body.get("email").asText();
@@ -68,33 +69,37 @@ public class AuthController {
 
 		return ResponseEntity.ok(BackApplication.MAPPER.createObjectNode().put("token", token));
 	}
-	
+
 	/*
-	 * inscription des utilisateurs qui a la fin devras n'etre accesible pas les user ayant le role ADMIN
+	 * inscription des utilisateurs qui a la fin devras n'etre accesible pas les
+	 * user ayant le role ADMIN
 	 * 
 	 * @return ResponseEntity<ObjectNode>
+	 * 
 	 * @param @RequestBody ObjectNode
 	 */
-	
+
 	@PostMapping("/register")
 	public ResponseEntity<ObjectNode> register(@RequestBody ObjectNode body) {
 		// get email password and token in the body
 		String email = body.get("email").asText();
 		String password = body.get("password").asText();
-		
+
 		// test if user already exist
 		User user = (User) userService.loadUserByUsername(email);
-		if (user != null) return ResponseEntity.ok(BackApplication.MAPPER.createObjectNode().put("error", "ERROR: l'utilisateur existe déjà"));
-		
-		// if the user not exists so register 
+		if (user != null)
+			return ResponseEntity
+					.ok(BackApplication.MAPPER.createObjectNode().put("error", "ERROR: l'utilisateur existe déjà"));
+
+		// if the user not exists so register
 		user = new User();
 		user.setEmail(email);
-		user.setRole("USER");
+		user.setRole("ROLE_USER");
 		user.getAuthorities();
 		user.setPassword(this.passwordEncoder.encode(password));
-		
-		r.table("user").insert(user).run(BackApplication.getConnect());
-		return ResponseEntity.ok(BackApplication.MAPPER.createObjectNode().put("success", "SUCCESS: l'utilisateur a bien était enregistrer"));
 
+		r.table("user").insert(user).run(BackApplication.getConnect());
+		return ResponseEntity.ok(BackApplication.MAPPER.createObjectNode()
+				.put("success", "SUCCESS: l'utilisateur a bien était enregistrer"));
 	}
 }
