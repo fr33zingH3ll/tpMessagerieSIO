@@ -7,7 +7,7 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
-import cc.freezinghell.messagerie.utils.MyHandler;
+import cc.freezinghell.messagerie.utils.MessagingHandler;
 
 /*
  * configure le websocket avec un handler et une route 
@@ -24,6 +24,6 @@ public class WebsocketConfig implements WebSocketConfigurer {
 	
 	@Bean
 	public WebSocketHandler myHandler() {
-		return new MyHandler();
+		return new MessagingHandler();
 	}
 }
