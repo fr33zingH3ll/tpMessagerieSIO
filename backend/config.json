@@ -1,5 +1,5 @@
 {
-	"dbUrl": "rethinkdb://userMessagerie:toto@localhost:28015/tpMessagerie",
+	"dbUrl": "rethinkdb://userMessagerie:toto@192.168.56.101:28015/tpMessagerie",
 	"jwtKey": "e07752942cf3101ff894ccd62ee2ff083ceaeac48edd39f3c73d6aa190349d30",
 	"jwtKeyAlgo": "HmacSHA256",
 	"jwtExpiration": 2629800

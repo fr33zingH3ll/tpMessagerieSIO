@@ -2,12 +2,15 @@ package cc.freezinghell.messagerie.controllers;
 
 import static com.rethinkdb.RethinkDB.r;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -75,14 +78,31 @@ public class AuthController {
 	
 	@PostMapping("/register")
 	public ResponseEntity<ObjectNode> register(@RequestBody ObjectNode body) {
+		// get email password and token in the body
 		String email = body.get("email").asText();
 		String password = body.get("password").asText();
+		String token = body.get("token").asText();
+		
+		// teste if the token is null
+		if (token == null) return ResponseEntity.ok(BackApplication.MAPPER.createObjectNode().put("error", "ERROR: il n'y a pas de token"));
+		
+		// get admin user who try to register new user
+		String admin_email = jwtUtil.extractUsername(token);
+		User admin = (User) userService.loadUserByUsername(admin_email);
+		System.out.println(admin.getRole());
+		if (admin.getRole() != "ADMIN") return ResponseEntity.ok(BackApplication.MAPPER.createObjectNode().put("error", "ERROR: Acces denied"));
+		
+		// test if user already exist
 		User user = (User) userService.loadUserByUsername(email);
 		if (user != null) return ResponseEntity.ok(BackApplication.MAPPER.createObjectNode().put("error", "ERROR: l'utilisateur existe déjà"));
+		
+		// if the user not exists so register 
 		user = new User();
 		user.setEmail(email);
+		user.setRole("USER");
+		user.getAuthorities();
 		user.setPassword(this.passwordEncoder.encode(password));
-		System.out.println(user.getPassword());
+		
 		r.table("user").insert(user).run(BackApplication.getConnect());
 		return ResponseEntity.ok(BackApplication.MAPPER.createObjectNode().put("success", "SUCCESS: l'utilisateur a bien était enregistrer"));
 

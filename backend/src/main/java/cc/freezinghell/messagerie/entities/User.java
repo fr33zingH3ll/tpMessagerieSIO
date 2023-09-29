@@ -1,14 +1,17 @@
 package cc.freezinghell.messagerie.entities;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import cc.freezinghell.messagerie.utils.CustomAuthorityDeserializer;
 
 /*
  * objet representant un utilisateur est qui implments UserDetails de spring boot
@@ -69,9 +72,12 @@ public class User implements UserDetails {
 		this.role = role;
 	}
 
+	@JsonDeserialize(using = CustomAuthorityDeserializer.class)
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Collections.emptyList();
+		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+		list.add(new SimpleGrantedAuthority(this.getRole()));
+		return list;
 	}
 
 	@Override
